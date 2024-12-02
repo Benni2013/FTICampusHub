@@ -1,0 +1,89 @@
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    /* width: 900px; */
+    width: 100%;
+    height: 100%;
+    /* max-width: 100%; */
+  }
+  .form-container {
+    padding: 40px;
+    width: 25%;
+    background-color: #172554;
+    color: #ffffff;
+  }
+  .form-container h1 {
+    margin: 0 0 20px;
+  }
+  .form-container p {
+    margin-bottom: 20px;
+    color: #a6b0cf;
+  }
+  .form-container input[type="email"],
+  .form-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  .form-container a {
+    color: #90cdf4;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .form-container a:hover {
+    text-decoration: underline;
+  }
+  .form-container button {
+    background-color: #475569;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .form-container button:hover {
+    background-color: #64748b;
+  }
+  .image-container {
+    background-image: url('../images/fti.jpg'); /* Ganti sesuai gambar Anda */
+    background-size: cover;
+    background-position: center;
+    width: 50%;
+    position: relative;
+  }
+  .image-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(23, 37, 84, 0.7);
+  }
+  .image-container .logo {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    color: #ffffff;
+    text-align: left;
+  }
+  .image-container .logo h1 {
+    margin: 0;
+    font-size: 28px;
+  }
