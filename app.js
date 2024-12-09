@@ -11,7 +11,7 @@ var app = express();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRoutes = require('./routes/authRoutes');
-console.log(typeof authRoutes);
+const pendaftaranRoutes = require('./routes/pendaftaranRoutes');
 
 // Middleware untuk parsing JSON
 app.use(logger('dev'));
@@ -29,6 +29,7 @@ app.set('view engine', 'hbs');
 app.use('/auth', authRoutes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/pendaftaran', pendaftaranRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
