@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Pastikan konfigurasi sequelize benar
+const sequelize = require('../config/sequelize'); // Pastikan konfigurasi sequelize benar
 
 // PANITIA_KEGIATAN Model
 const PanitiaKegiatan = sequelize.define('PanitiaKegiatan', {

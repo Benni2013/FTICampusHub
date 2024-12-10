@@ -1,4 +1,4 @@
-const sequelize = require('../config/database');
+const sequelize = require('../config/sequelize');
 const Users = require('./Users');
 const Penyelenggara = require('./Penyelenggara');
 const Kegiatan = require('./Kegiatan');

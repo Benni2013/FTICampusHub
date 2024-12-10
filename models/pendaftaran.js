@@ -1,50 +1,42 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize');
+const sequelize = require('../config/sequelize'); // Pastikan konfigurasi sequelize benar
 
+// PENDAFTARAN Model
 const Pendaftaran = sequelize.define('Pendaftaran', {
-  user_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    references: {
-      model: 'users',
-      key: 'user_id',
+    user_id: { 
+        type: DataTypes.INTEGER, 
+        primaryKey: true 
     },
-    onDelete: 'CASCADE',
-  },
-  kegiatan_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    references: {
-      model: 'kegiatan',
-      key: 'kegiatan_id',
+
+    kegiatan_id: { 
+        type: DataTypes.INTEGER, 
+        primaryKey: true 
     },
-    onDelete: 'CASCADE',
-  },
-  status: {
-    type: DataTypes.ENUM('accepted', 'rejected', 'pending'),
-    defaultValue: 'pending',
-    allowNull: false,
-  },
-  alamat: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  jabatan: {
-    type: DataTypes.STRING(100),
-    allowNull: true,
-  },
-  alasan_pendaftaran: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  waktu_daftar: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-    allowNull: false,
-  },
+
+    status: { 
+        type: DataTypes.ENUM('accepted','rejected','pending'), 
+        allowNull: false 
+    },
+
+    alamat: { 
+        type: DataTypes.TEXT 
+    },
+
+    jabatan: { 
+        type: DataTypes.STRING(100) 
+    },
+
+    alasan_pendaftaran: { 
+        type: DataTypes.TEXT 
+    },
+
+    waktu_daftar: { 
+        type: DataTypes.DATE, 
+        allowNull: false 
+    },
 }, {
-  tableName: 'pendaftaran',
-  timestamps: false,
+    tableName: 'pendaftaran',
+    timestamps: false,
 });
 
 module.exports = Pendaftaran;

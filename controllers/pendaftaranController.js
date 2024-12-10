@@ -1,6 +1,6 @@
-const Pendaftaran = require('../models/pendaftaran');
-const Kegiatan = require('../models/kegiatan'); // Untuk validasi kegiatan
-const User = require('../models/user'); // Untuk validasi user
+const Pendaftaran = require('../models/Pendaftaran'); 
+const Kegiatan = require('../models/Kegiatan'); 
+const Users = require('../models/Users'); 
 
 exports.createRegistration = async (req, res) => {
   const { user_id, kegiatan_id, alamat, jabatan, alasan_pendaftaran } = req.body;
@@ -13,8 +13,8 @@ exports.createRegistration = async (req, res) => {
     }
 
     // Validasi apakah user ada
-    const user = await User.findByPk(user_id);
-    if (!user) {
+    const users = await Users.findByPk(user_id);
+    if (!users) {
       return res.status(404).json({ error: 'User tidak ditemukan' });
     }
 
