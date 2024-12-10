@@ -13,6 +13,7 @@ var usersRouter = require('./routes/users');
 const authRoutes = require('./routes/authRoutes');
 const pendaftaranRoutes = require('./routes/pendaftaranRoutes');
 const kegiatanRoutes = require('./routes/kegiatanRoutes');
+const pengumumanRoutes = require('./routes/pengumumanRoutes');
 
 // Middleware untuk parsing JSON
 app.use(logger('dev'));
@@ -32,6 +33,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pendaftaran', pendaftaranRoutes);
 app.use('/kegiatan', kegiatanRoutes);
+app.use('/pengumuman', pengumumanRoutes);
 
 
 // catch 404 and forward to error handler

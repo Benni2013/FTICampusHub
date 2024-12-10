@@ -4,7 +4,7 @@ const Users = require('../models/Users');
 const Penyelenggara = require('../models/Penyelenggara'); 
 
 exports.register = async (req, res) => {
-  const { nama, nim, email, password } = req.body;
+  const { nama, email, password } = req.body;
 
   try {
     // Hash password
@@ -13,7 +13,6 @@ exports.register = async (req, res) => {
     // Save user
     const users = await Users.create({
       nama,
-      nim,
       email,
       password: hashedPassword,
     });

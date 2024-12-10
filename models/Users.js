@@ -15,8 +15,7 @@ const Users = sequelize.define('Users', {
     },
 
     nim: { 
-        type: DataTypes.STRING(50) ,
-        allowNull: false
+        type: DataTypes.STRING(50)
     },
 
     email: { 
