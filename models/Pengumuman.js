@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Pastikan konfigurasi sequelize benar
+const sequelize = require('../config/sequelize'); // Pastikan konfigurasi sequelize benar
 
 // PENGUMUMAN Model
 const Pengumuman = sequelize.define('Pengumuman', {
@@ -11,7 +11,7 @@ const Pengumuman = sequelize.define('Pengumuman', {
 
     kegiatan_id: { 
         type: DataTypes.INTEGER, 
-        allowNull: false 
+        allowNull: false
     },
 
     judul: { 
@@ -30,7 +30,8 @@ const Pengumuman = sequelize.define('Pengumuman', {
     },
 
     file_path: { 
-        type: DataTypes.STRING(255) 
+        type: DataTypes.STRING(255),
+        allowNull: true
     },
 }, {
     tableName: 'pengumuman',
