@@ -1,8 +1,15 @@
-const { sequelize } = require('../models/RelasiTabel');
-const { Kegiatan, Pendaftaran, Users, PanitiaKegiatan } = require('../models/RelasiTabel');
+const { sequelize } = require("../models/RelasiTabel");
+const {
+  Kegiatan,
+  Pendaftaran,
+  Users,
+  PanitiaKegiatan,
+  Sertifikat,
+} = require("../models/RelasiTabel");
 
 exports.createRegistration = async (req, res) => {
-  const { user_id, kegiatan_id, alamat, jabatan, alasan_pendaftaran } = req.body;
+  const { user_id, kegiatan_id, alamat, jabatan, alasan_pendaftaran } =
+    req.body;
 
   // Mulai transaksi
   const transaction = await sequelize.transaction();
@@ -32,7 +39,7 @@ exports.createRegistration = async (req, res) => {
     if (existingRegistration) {
       return res
         .status(400)
-        .json({ error: 'User sudah terdaftar dalam kegiatan ini' });
+        .json({ error: "User sudah terdaftar dalam kegiatan ini" });
     }
 
     // Buat pendaftaran
@@ -44,7 +51,7 @@ exports.createRegistration = async (req, res) => {
         jabatan,
         alasan_pendaftaran,
         waktu_daftar: new Date(), // Waktu pendaftaran otomatis
-        status: 'pending', // Status default
+        status: "pending", // Status default
       },
       { transaction }
     );
@@ -54,7 +61,7 @@ exports.createRegistration = async (req, res) => {
 
     // Kirim respons dengan data pendaftaran yang baru saja dibuat
     res.status(201).json({
-      message: 'Pendaftaran berhasil',
+      message: "Pendaftaran berhasil",
       pendaftaran: {
         id: pendaftaran.id,
         user_id: pendaftaran.user_id,
@@ -77,10 +84,10 @@ exports.createRegistration = async (req, res) => {
 };
 
 // Fungsi untuk menyeleksi pendaftaran
+// Fungsi untuk menyeleksi pendaftaran
 exports.selectRegistration = async (req, res) => {
   const { user_id, kegiatan_id, status } = req.body;
 
-  // Mulai transaksi
   const transaction = await sequelize.transaction();
 
   try {
@@ -91,52 +98,49 @@ exports.selectRegistration = async (req, res) => {
     });
 
     if (!pendaftaran) {
-      return res.status(404).json({ error: 'Pendaftaran tidak ditemukan' });
+      return res.status(404).json({ error: "Pendaftaran tidak ditemukan" });
     }
 
-    if (!['accepted', 'rejected'].includes(status)) {
-      return res.status(400).json({ error: 'Status tidak valid' });
+    if (!["accepted", "rejected"].includes(status)) {
+      return res.status(400).json({ error: "Status tidak valid" });
     }
 
     // Update status pendaftaran
     pendaftaran.status = status;
     await pendaftaran.save({ transaction });
 
-    // Jika diterima, ubah role user menjadi panitia dan masukkan ke tabel PanitiaKegiatan
-    if (status === 'accepted') {
+    if (status === "accepted") {
       const user = await Users.findByPk(user_id, { transaction });
       if (!user) {
         throw new Error(`User dengan ID ${user_id} tidak ditemukan`);
       }
 
-      // Ubah role user menjadi 'panitia'
-      user.role = 'panitia';
+      user.role = "panitia";
       await user.save({ transaction });
 
-      // Masukkan data ke tabel PanitiaKegiatan
-      await PanitiaKegiatan.create(
+      const panitiaKegiatan = await PanitiaKegiatan.create(
+        { kegiatan_id, user_id, jabatan: pendaftaran.jabatan },
+        { transaction }
+      );
+
+      const nomorSertifikat = `SERT-${new Date().getFullYear()}-${
+        panitiaKegiatan.panitia_kegiatan_id
+      }`;
+
+      await Sertifikat.create(
         {
-          kegiatan_id,
-          user_id,
-          jabatan: pendaftaran.jabatan, // Menggunakan jabatan dari pendaftaran
+          panitia_kegiatan_id: panitiaKegiatan.panitia_kegiatan_id, // Perbaiki di sini
+          nomor_sertifikat: nomorSertifikat,
+          file_path: "",
+          tanggal_terbit: new Date(),
         },
         { transaction }
       );
     }
 
-    // Commit transaksi
     await transaction.commit();
-
-    res.status(200).json({
-      message: `Pendaftaran berhasil diubah menjadi ${status}`,
-      pendaftaran: {
-        user_id: pendaftaran.user_id,
-        kegiatan_id: pendaftaran.kegiatan_id,
-        status: pendaftaran.status,
-      },
-    });
+    res.status(200).json({ message: "Pendaftaran berhasil diperbarui." });
   } catch (error) {
-    // Rollback transaksi jika ada kesalahan
     if (!transaction.finished) {
       await transaction.rollback();
     }

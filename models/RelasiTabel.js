@@ -15,6 +15,7 @@ PanitiaKegiatan.belongsTo(Kegiatan, { foreignKey: 'kegiatan_id' });
 PanitiaKegiatan.belongsTo(Users, { foreignKey: 'user_id' });
 Pendaftaran.belongsTo(Users, { foreignKey: 'user_id' });
 Pendaftaran.belongsTo(Kegiatan, { foreignKey: 'kegiatan_id' });
+PanitiaKegiatan.hasOne(Sertifikat, { foreignKey: 'panitia_kegiatan_id' });
 Sertifikat.belongsTo(PanitiaKegiatan, { foreignKey: 'panitia_kegiatan_id' });
 Pengumuman.belongsTo(Kegiatan, { foreignKey: 'kegiatan_id' });
 

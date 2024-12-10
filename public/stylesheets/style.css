@@ -1,8 +1,72 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
 }
 
-a {
-  color: #00B7FF;
+.certificate {
+  width: 800px;
+  height: 600px;
+  background: white;
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 30px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .logo img {
+  width: 60px;
+  height: 60px;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.content h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+.content h3 {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.content h4 {
+  font-size: 20px;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.footer .instructors p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer .qr-code img {
+  width: 100px;
+  height: 100px;
 }
