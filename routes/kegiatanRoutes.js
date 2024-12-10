@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { tambahKegiatan } = require('../controllers/kegiatanController');
+const { tambahKegiatan, lihatKegiatan } = require('../controllers/kegiatanController');
 
 router.post('/tambah', tambahKegiatan);
+
+router.get('/:kegiatan_id', lihatKegiatan);
 
 module.exports = router;

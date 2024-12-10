@@ -72,4 +72,34 @@ const tambahKegiatan = async (req, res) => {
   }
 };
 
-module.exports = { tambahKegiatan };
+const lihatKegiatan = async (req, res) => {
+  try {
+    const { kegiatan_id } = req.params; // Ambil kegiatan_id dari parameter URL
+
+    // Ambil data kegiatan berdasarkan kegiatan_id dengan informasi relasi penyelenggara
+    const kegiatanDetail = await Kegiatan.findByPk(kegiatan_id, {
+      include: [
+        {
+          model: Penyelenggara,
+          attributes: ["nama_penyelenggara", "email", "no_telp", "jenis"],
+        },
+      ],
+    });
+
+    // Cek jika data kegiatan tidak ditemukan
+    if (!kegiatanDetail) {
+      return res.status(404).json({ error: "Kegiatan tidak ditemukan" });
+    }
+
+    // Kirimkan data kegiatan dalam format JSON
+    res.status(200).json({
+      message: "Detail kegiatan berhasil ditemukan!",
+      kegiatan: kegiatanDetail,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Terjadi kesalahan pada server." });
+  }
+};
+
+module.exports = { tambahKegiatan, lihatKegiatan };
