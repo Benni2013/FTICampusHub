@@ -91,3 +91,13 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: 'Server error occurred' });
   }
 };
+
+exports.logout = async (req, res) => {
+  try {
+    res.clearCookie('token');
+    res.json({ message: 'Logout successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error during logout' });
+  }
+};
