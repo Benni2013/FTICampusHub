@@ -185,7 +185,6 @@ ALTER TABLE `sertifikat`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `nim` (`nim`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
