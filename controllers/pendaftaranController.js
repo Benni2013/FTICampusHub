@@ -33,7 +33,15 @@ exports.createRegistration = async (req, res) => {
       alasan_pendaftaran,
     });
 
-    res.status(201).json({ message: 'Pendaftaran berhasil', pendaftaran });
+    // Kembalikan data pendaftaran dengan relasi
+    const pendaftaranDetail = await Pendaftaran.findByPk(pendaftaran.id, {
+      include: [
+        { model: Users, attributes: ['nama', 'email'] },
+        { model: Kegiatan, attributes: ['nama_kegiatan', 'tanggal_mulai'] },
+      ],
+    });
+
+    res.status(201).json({ message: 'Pendaftaran berhasil', pendaftaran: pendaftaranDetail });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

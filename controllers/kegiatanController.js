@@ -1,4 +1,4 @@
-const Kegiatan = require('../models/Kegiatan');
+const { Kegiatan, Penyelenggara } = require('../models/RelasiTabel');
 
 // Fungsi untuk menambah kegiatan
 const tambahKegiatan = async (req, res) => {
@@ -15,9 +15,24 @@ const tambahKegiatan = async (req, res) => {
       lokasi,
     } = req.body;
 
-    // Validasi data
-    if (!penyelenggara_id || !nama_kegiatan || !tanggal_mulai || !tanggal_selesai || !batas_pendaftaran || !kuota || !status || !lokasi) {
-      return res.status(400).json({ error: 'Semua data wajib diisi!' });
+    // Validasi data wajib
+    if (
+      !penyelenggara_id ||
+      !nama_kegiatan ||
+      !tanggal_mulai ||
+      !tanggal_selesai ||
+      !batas_pendaftaran ||
+      !kuota ||
+      !status ||
+      !lokasi
+    ) {
+      return res.status(400).json({ error: "Semua data wajib diisi!" });
+    }
+
+    // Validasi keberadaan penyelenggara
+    const penyelenggara = await Penyelenggara.findByPk(penyelenggara_id);
+    if (!penyelenggara) {
+      return res.status(404).json({ error: "Penyelenggara tidak ditemukan" });
     }
 
     // Simpan data kegiatan ke database
@@ -33,10 +48,27 @@ const tambahKegiatan = async (req, res) => {
       lokasi,
     });
 
-    res.status(201).json({ message: 'Kegiatan berhasil ditambahkan!', kegiatan: kegiatanBaru });
+    console.log('Data kegiatan baru:', kegiatanBaru); // Debug
+
+    // Ambil data kegiatan beserta informasi relasi penyelenggara
+    const kegiatanDetail = await Kegiatan.findByPk(kegiatanBaru.kegiatan_id, {
+      include: [
+        {
+          model: Penyelenggara,
+          attributes: ["nama_penyelenggara", "email", "no_telp", "jenis"],
+        },
+      ],
+    });
+
+    console.log('Detail kegiatan:', kegiatanDetail); // Debug
+
+    res.status(201).json({
+      message: "Kegiatan berhasil ditambahkan!",
+      kegiatan: kegiatanDetail,
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    res.status(500).json({ error: "Terjadi kesalahan pada server." });
   }
 };
 

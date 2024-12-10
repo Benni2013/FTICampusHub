@@ -9,6 +9,8 @@ const Pengumuman = require('./Pengumuman');
 
 // Define Relationships
 Kegiatan.belongsTo(Penyelenggara, { foreignKey: 'penyelenggara_id' });
+Penyelenggara.hasMany(Kegiatan, { foreignKey: 'penyelenggara_id' });
+
 PanitiaKegiatan.belongsTo(Kegiatan, { foreignKey: 'kegiatan_id' });
 PanitiaKegiatan.belongsTo(Users, { foreignKey: 'user_id' });
 Pendaftaran.belongsTo(Users, { foreignKey: 'user_id' });
