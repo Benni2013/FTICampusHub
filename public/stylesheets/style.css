@@ -1,8 +1,77 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+
+.sidebar {
+  background: #2d3748;
+  color: #cbd5e0;
+  position: fixed;
+  width: 256px; /* Fixed width for the sidebar */
+  height: 100vh; /* Full viewport height */
+  top: 0; /* Align top */
+  left: 0; /* Align left */
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  margin: 0;
+  width: 100%;
+  border-radius: 0;
+  background-color: #2d3748;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-link:hover {
+  background-color: #4a5568;
+  color: #ffffff;
+}
+
+.navbar {
+  position: fixed;
+  width: 84%; /* Full width */
+  top: 0; /* Align top */
+  left: 256px; /* Offset by the width of the sidebar */
+  height: 50px; /* Fixed height */
+  background: #ffffff; /* Example background color */
+  z-index: 5;
+}
+
+main, .main-admin {
+  margin-top: 50px; /* Offset for the height of the navbar */
+  margin-left: 256px; /* Offset for the width of the sidebar */
+  padding: 20px;
+  width: calc(100% - 256px); /* Calculate the remaining width */
+  min-height: calc(100vh - 50px); /* Calculate the remaining height minus navbar */
+}
+
+@media screen and (max-width: 768px) {
+  .navbar, .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    top: auto;
+    left: auto;
+  }
+
+  .sidebar-link {
+    justify-content: center; /* Center items in mobile view */
+  }
+
+  main, .main-admin {
+    margin-left: 0;
+    margin-top: 0;
+    width: 100%;
+  }
+}
+
+
+
