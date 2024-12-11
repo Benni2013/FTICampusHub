@@ -11,7 +11,6 @@ const tambahKegiatan = async (req, res) => {
       tanggal_selesai,
       batas_pendaftaran,
       kuota,
-      status,
       lokasi,
     } = req.body;
 
@@ -22,21 +21,23 @@ const tambahKegiatan = async (req, res) => {
       !tanggal_mulai ||
       !tanggal_selesai ||
       !batas_pendaftaran ||
-      !kuota ||
-      !status ||
-      !lokasi
+      !kuota
     ) {
-      return res.status(400).json({ error: "Semua data wajib diisi!" });
+      return res.status(400).render('informasi_admin', { 
+        error: 'Data wajib tidak boleh kosong!',
+      });
     }
 
     // Validasi keberadaan penyelenggara
     const penyelenggara = await Penyelenggara.findByPk(penyelenggara_id);
     if (!penyelenggara) {
-      return res.status(404).json({ error: "Penyelenggara tidak ditemukan" });
+      return res.status(404).render('informasi_admin', { 
+        error: 'Penyelenggara tidak ditemukan',
+      });
     }
 
-    // Simpan data kegiatan ke database
-    const kegiatanBaru = await Kegiatan.create({
+    // Simpan data kegiatan ke database dengan status default 'published'
+    await Kegiatan.create({
       penyelenggara_id,
       nama_kegiatan,
       deskripsi,
@@ -44,31 +45,17 @@ const tambahKegiatan = async (req, res) => {
       tanggal_selesai,
       batas_pendaftaran,
       kuota,
-      status,
-      lokasi,
+      status: 'published', // Default status
+      lokasi, // Lokasi bersifat opsional
     });
 
-    console.log('Data kegiatan baru:', kegiatanBaru); // Debug
-
-    // Ambil data kegiatan beserta informasi relasi penyelenggara
-    const kegiatanDetail = await Kegiatan.findByPk(kegiatanBaru.kegiatan_id, {
-      include: [
-        {
-          model: Penyelenggara,
-          attributes: ["nama_penyelenggara", "email", "no_telp", "jenis"],
-        },
-      ],
-    });
-
-    console.log('Detail kegiatan:', kegiatanDetail); // Debug
-
-    res.status(201).json({
-      message: "Kegiatan berhasil ditambahkan!",
-      kegiatan: kegiatanDetail,
-    });
+    // Redirect ke halaman penyelenggara home
+    res.redirect('/penyelenggara/home');
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Terjadi kesalahan pada server." });
+    res.status(500).render('informasi_admin', { 
+      error: 'Terjadi kesalahan pada server.',
+    });
   }
 };
 

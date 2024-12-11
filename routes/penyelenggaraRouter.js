@@ -18,4 +18,8 @@ router.get('/kelola_pendaftaran/pendaftar', function(req, res, next) {
     res.render('./pendaftar_admin.hbs', { title: 'Kelola Pendaftaran', layout: "layouts/main_admin"});
 });
 
+router.get('/ProfileAdm', function(req, res, next) {
+    res.render('./Profile.hbs', { title: 'Profile', layout: "layouts/main_admin"});
+});
+
 module.exports = router;
