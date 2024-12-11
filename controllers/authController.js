@@ -77,18 +77,6 @@ exports.login = async (req, res) => {
       expiresIn: '1h',
     });
 
-    // res.json({
-    //   message: 'Login successful as User',
-    //   token,
-    //   role: 'user',
-    //   user: {
-    //     id: user.user_id,
-    //     nama: user.nama,
-    //     email: user.email,
-    //     role: user.role,
-    //   },
-    // });
-
     console.log({
       message: 'Login successful as User',
       token,
@@ -113,7 +101,8 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
   try {
     res.clearCookie('token');
-    res.json({ message: 'Logout successful' });
+    // res.json({ message: 'Logout successful' });
+    res.redirect('/');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error during logout' });
@@ -121,7 +110,7 @@ exports.logout = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-  const { email, nama, oldPassword, newPassword } = req.body;
+  const { email, nama, newPassword, confirm_password } = req.body;
 
   try {
     // Cek user berdasarkan email dan nama
@@ -132,9 +121,13 @@ exports.changePassword = async (req, res) => {
     }
 
     // Validasi password lama
-    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Password lama tidak sesuai' });
+    // const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+    // if (!isPasswordValid) {
+    //   return res.status(401).json({ error: 'Password lama tidak sesuai' });
+    // }
+
+    if (!(newPassword == confirm_password)) {
+      return res.status(401).json({ error: 'Konfirmasi Password tidak sesuai' });
     }
 
     // Hash password baru
@@ -144,7 +137,10 @@ exports.changePassword = async (req, res) => {
     user.password = hashedPassword;
     await user.save();
 
-    res.json({ message: 'Password berhasil diubah untuk User' });
+    // res.json({ message: 'Password berhasil diubah untuk User' });
+
+    console.log({ message: 'Password berhasil diubah untuk User' });
+    res.redirect('/');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Terjadi kesalahan server' });

@@ -19,15 +19,15 @@
             <div>
                 <h1 class="text-2xl font-bold mb-10 px-5 pt-5">FTICampusHub</h1>
                 <nav aria-label="Main Navigation">
-                    <a href="/mahasiswa/home" class="sidebar-link">
+                    <a href="/mahasiswa/home?user={{ data.user.user_id }}" class="sidebar-link">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/11f7aa906ef38321e109189976b055703071b5f80cd182b30e05b7080af1f636" class="w-4 h-auto" alt="Home Icon">
                         <span>Home</span>
                     </a>
-                    <a href="/mahasiswa/pengumuman" class="sidebar-link">
+                    <a href="/mahasiswa/pengumuman?user={{ data.user.user_id }}" class="sidebar-link">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/73c8c4e63f7b33d7f8e28967d5174446d18cee323bcf267cfcf16443168d95c4" class="w-4 h-auto" alt="Announcements Icon">
                         <span>Pengumuman</span>
                     </a>
-                    <a href="/mahasiswa/sertifikat" class="sidebar-link">
+                    <a href="/mahasiswa/sertifikat?user={{ data.user.user_id }}" class="sidebar-link">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/84b52c7a24627cd0dcb4530f0dfcb2e69797a8cf450f714a6e266b6fb2925224" class="w-4 h-auto" alt="Certificate Icon">
                         <span>Sertifikat</span>
                     </a>
@@ -39,21 +39,24 @@
             <nav class="navbar bg-white shadow px-5 py-4 flex justify-between items-center  position-fixed">
                 <h2 class="text-xl font-semibold">{{title}}</h2>
                 <div class="flex items-center gap-4 relative">
-                    <span class="font-medium text-gray-800">{{ user.nama }}</span>
+                    <span class="font-medium text-gray-800">{{ data.user.nama }}</span>
                     {{!-- <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1068ced74a496647246be5820b9c8a9773d19a8b32e9eb66dffaa28b75fe600c" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="//toggleDropdown()"> --}}
-                    {{#if user.pp_path}}
-                        <img src="/pp_mahasiswa/{{ user.pp_path }}" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
+                    {{#if data.user.pp_path}}
+                        <img src="/pp_mahasiswa/{{ data.user.pp_path }}" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
                     {{else}}
                         <img src="/pp_mahasiswa/pp_mahasiswa_default.png" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
                     {{/if}}
                     <!-- Dropdown Menu -->
                     <div id="profileDropdown" class="hidden absolute right-0 mt-20 bg-white shadow-lg rounded z-50">
                         <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                        <a href="/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
                     </div>
                 </div>
             </nav>
+
             <main class="px-10 pt-20 ">
+            <main class="p-10 mt-10">
+
                 {{{body}}}
             </main>
         </div>

@@ -16,6 +16,7 @@ const kegiatanRoutes = require('./routes/kegiatanRoutes');
 const pengumumanRoutes = require('./routes/pengumumanRoutes');
 const riwayatRoutes = require('./routes/riwayatRoutes');
 const sertifikatRoutes = require('./routes/sertifikatRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 
 // Middleware untuk parsing JSON
 app.use(logger('dev'));
@@ -38,6 +39,7 @@ app.use('/kegiatan', kegiatanRoutes);
 app.use('/pengumuman', pengumumanRoutes);
 app.use('/riwayat', riwayatRoutes);
 app.use('/sertifikat', sertifikatRoutes);
+app.use('/profile', profileRoutes);
 
 
 
