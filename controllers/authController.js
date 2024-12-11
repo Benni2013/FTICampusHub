@@ -121,37 +121,17 @@ exports.logout = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-  const { email, oldPassword, newPassword } = req.body;
+  const { email, nama, oldPassword, newPassword } = req.body;
 
   try {
-    // Cek user berdasarkan email
-    let user = await Users.findOne({ where: { email } });
+    // Cek user berdasarkan email dan nama
+    let user = await Users.findOne({ where: { email, nama } });
 
     if (!user) {
-      // Jika tidak ditemukan di Users, cek di tabel Penyelenggara
-      const penyelenggara = await Penyelenggara.findOne({ where: { email } });
-
-      if (!penyelenggara) {
-        return res.status(404).json({ error: 'User or Organizer not found' });
-      }
-
-      // Validasi password lama untuk Penyelenggara
-      const isPasswordValid = await bcrypt.compare(oldPassword, penyelenggara.password);
-      if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Password lama tidak sesuai' });
-      }
-
-      // Hash password baru
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-      // Update password di tabel Penyelenggara
-      penyelenggara.password = hashedPassword;
-      await penyelenggara.save();
-
-      return res.json({ message: 'Password berhasil diubah untuk Penyelenggara' });
+      return res.status(404).json({ error: 'User tidak ditemukan dengan email dan nama yang diberikan' });
     }
 
-    // Validasi password lama untuk Users
+    // Validasi password lama
     const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Password lama tidak sesuai' });
