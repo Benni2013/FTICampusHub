@@ -108,3 +108,34 @@ exports.logout = async (req, res) => {
     res.status(500).json({ error: 'Error during logout' });
   }
 };
+
+exports.changePassword = async (req, res) => {
+  const { email, nama, oldPassword, newPassword } = req.body;
+
+  try {
+    // Cek user berdasarkan email dan nama
+    let user = await Users.findOne({ where: { email, nama } });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User tidak ditemukan dengan email dan nama yang diberikan' });
+    }
+
+    // Validasi password lama
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Password lama tidak sesuai' });
+    }
+
+    // Hash password baru
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update password di tabel Users
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json({ message: 'Password berhasil diubah untuk User' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Terjadi kesalahan server' });
+  }
+};
