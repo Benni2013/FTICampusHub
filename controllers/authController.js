@@ -17,7 +17,9 @@ exports.register = async (req, res) => {
       password: hashedPassword,
     });
 
-    res.status(201).json({ message: 'User registered successfully', users });
+    // res.status(201).json({ message: 'User registered successfully', users });
+    console.log({ message: 'User registered successfully', users });
+    res.redirect('/');
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -41,7 +43,7 @@ exports.login = async (req, res) => {
       // Validasi password untuk Penyelenggara
       const isPasswordValid = await bcrypt.compare(password, penyelenggara.password);
       if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ error: 'Email dan Password Salah' });
       }
 
       // Generate JWT untuk Penyelenggara
@@ -67,7 +69,7 @@ exports.login = async (req, res) => {
     // Validasi password untuk Users
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Email dan Password Salah' });
     }
 
     // Generate JWT untuk Users
@@ -75,7 +77,19 @@ exports.login = async (req, res) => {
       expiresIn: '1h',
     });
 
-    res.json({
+    // res.json({
+    //   message: 'Login successful as User',
+    //   token,
+    //   role: 'user',
+    //   user: {
+    //     id: user.user_id,
+    //     nama: user.nama,
+    //     email: user.email,
+    //     role: user.role,
+    //   },
+    // });
+
+    console.log({
       message: 'Login successful as User',
       token,
       role: 'user',
@@ -85,7 +99,11 @@ exports.login = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-    });
+    })
+
+    res.redirect(`/mahasiswa/home?user=${user.user_id}`);
+
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error occurred' });

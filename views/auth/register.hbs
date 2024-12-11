@@ -3,10 +3,10 @@
                 <h1 class="text-3xl font-bold mb-4">FTI Campus Hub</h1>
                 <p class="mb-8">Welcome Back! Please enter your details.</p>
                 <div class="mb-4">
-                    <form action="/register" method="POST" class="space-y-4">
+                    <form action="/auth/register" method="POST" class="space-y-4">
                         <div>
-                            <label for="username" class="block text-gray-400 text-sm font-bold mb-2">Username</label>
-                            <input type="text" id="username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" placeholder="Username"required>
+                            <label for="nama" class="block text-gray-400 text-sm font-bold mb-2">Nama</label>
+                            <input type="text" id="nama" name="nama" class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" placeholder="Nama"required>
                         </div>
                         <div>
                             <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Email</label>
@@ -20,7 +20,7 @@
                             <label for="confirm_password" class="block text-gray-400 text-sm font-bold mb-2">Confirm Password</label>
                             <input type="password" id="confirm_password" name="confirm_password" class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" placeholder="Confirm password"required>
                         </div>
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</button>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Register</button>
                         <div class="mt-4"> <p class="text-sm text-gray-400">Have an account? <a href="/" class="text-blue-500 hover:text-blue-800">Sign In</a></p>
                         </div>
                     </form>

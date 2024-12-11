@@ -39,8 +39,13 @@
             <nav class="navbar bg-white shadow px-5 py-4 flex justify-between items-center  position-fixed">
                 <h2 class="text-xl font-semibold">{{title}}</h2>
                 <div class="flex items-center gap-4 relative">
-                    <span class="font-medium text-gray-800">Carlos López</span>
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1068ced74a496647246be5820b9c8a9773d19a8b32e9eb66dffaa28b75fe600c" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
+                    <span class="font-medium text-gray-800">{{ user.nama }}</span>
+                    {{!-- <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1068ced74a496647246be5820b9c8a9773d19a8b32e9eb66dffaa28b75fe600c" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="//toggleDropdown()"> --}}
+                    {{#if user.pp_path}}
+                        <img src="/pp_mahasiswa/{{ user.pp_path }}" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
+                    {{else}}
+                        <img src="/pp_mahasiswa/pp_mahasiswa_default.png" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
+                    {{/if}}
                     <!-- Dropdown Menu -->
                     <div id="profileDropdown" class="hidden absolute right-0 mt-20 bg-white shadow-lg rounded z-50">
                         <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
