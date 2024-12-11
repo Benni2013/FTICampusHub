@@ -119,3 +119,54 @@ exports.logout = async (req, res) => {
     res.status(500).json({ error: 'Error during logout' });
   }
 };
+
+exports.changePassword = async (req, res) => {
+  const { email, oldPassword, newPassword } = req.body;
+
+  try {
+    // Cek user berdasarkan email
+    let user = await Users.findOne({ where: { email } });
+
+    if (!user) {
+      // Jika tidak ditemukan di Users, cek di tabel Penyelenggara
+      const penyelenggara = await Penyelenggara.findOne({ where: { email } });
+
+      if (!penyelenggara) {
+        return res.status(404).json({ error: 'User or Organizer not found' });
+      }
+
+      // Validasi password lama untuk Penyelenggara
+      const isPasswordValid = await bcrypt.compare(oldPassword, penyelenggara.password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ error: 'Password lama tidak sesuai' });
+      }
+
+      // Hash password baru
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update password di tabel Penyelenggara
+      penyelenggara.password = hashedPassword;
+      await penyelenggara.save();
+
+      return res.json({ message: 'Password berhasil diubah untuk Penyelenggara' });
+    }
+
+    // Validasi password lama untuk Users
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Password lama tidak sesuai' });
+    }
+
+    // Hash password baru
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update password di tabel Users
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json({ message: 'Password berhasil diubah untuk User' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Terjadi kesalahan server' });
+  }
+};
