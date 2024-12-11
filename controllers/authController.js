@@ -77,18 +77,6 @@ exports.login = async (req, res) => {
       expiresIn: '1h',
     });
 
-    // res.json({
-    //   message: 'Login successful as User',
-    //   token,
-    //   role: 'user',
-    //   user: {
-    //     id: user.user_id,
-    //     nama: user.nama,
-    //     email: user.email,
-    //     role: user.role,
-    //   },
-    // });
-
     console.log({
       message: 'Login successful as User',
       token,
@@ -113,7 +101,8 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
   try {
     res.clearCookie('token');
-    res.json({ message: 'Logout successful' });
+    // res.json({ message: 'Logout successful' });
+    res.redirect('/');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error during logout' });

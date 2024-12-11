@@ -8,8 +8,9 @@ const {
 } = require("../models/RelasiTabel");
 
 exports.createRegistration = async (req, res) => {
-  const { user_id, kegiatan_id, alamat, jabatan, alasan_pendaftaran } =
-    req.body;
+  const { alamat, jabatan, alasan_pendaftaran } = req.body;
+  const user_id = req.query.user;
+  const kegiatan_id = req.query.kegiatan;
 
   // Mulai transaksi
   const transaction = await sequelize.transaction();
@@ -60,7 +61,7 @@ exports.createRegistration = async (req, res) => {
     await transaction.commit();
 
     // Kirim respons dengan data pendaftaran yang baru saja dibuat
-    res.status(201).json({
+    console.log({
       message: "Pendaftaran berhasil",
       pendaftaran: {
         id: pendaftaran.id,
@@ -73,6 +74,7 @@ exports.createRegistration = async (req, res) => {
         status: pendaftaran.status,
       },
     });
+    res.redirect(`/mahasiswa/pengumuman?user=${user_id}`);
   } catch (error) {
     // Rollback transaksi jika terjadi kesalahan
     if (!transaction.finished) {
