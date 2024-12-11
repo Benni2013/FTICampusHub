@@ -1,38 +1,34 @@
-<div class="flex flex-col ml-5 w-[82%] max-md:ml-0 max-md:w-full">
-  <div class="flex flex-col w-full max-md:max-w-full">
-    <div class="flex flex-col self-center mt-3.5 w-full max-w-[1011px] max-md:max-w-full">
-      <form class="flex flex-col self-end px-12 mx-5 py-10 mt-2 max-w-full text-xl font-semibold bg-gray-700 rounded-3xl w-[949px] max-md:px-5">
-        <label for="name" class="self-start ml-2 text-white max-md:ml-2.5">Judul Kegiatan</label>
-        <input type="text" id="name" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50 max-md:px-5 max-md:mr-0.5 max-md:max-w-full" aria-label="Masukkan nama" />
+<div>
+  {{#if error}}
+    <p class="text-red-500">{{error}}</p>
+  {{/if}}
+  <form method="POST" action="/kegiatan/tambah" class="flex flex-col px-12 py-10 mt-20 bg-gray-700 rounded-3xl w-full text-xl font-semibold">
+    <label for="penyelenggara_id" class="mt-4 text-white">ID Penyelenggara</label>
+    <input type="number" name="penyelenggara_id" id="penyelenggara_id" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
 
-        <label for="nim" class="self-start mt-2 ml-2 text-white max-md:ml-2.5">Deskripsi Kegiatan</label>
-        <input type="text" id="nim" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50 max-md:px-5 max-md:max-w-full" aria-label="Masukkan NIM" />
+    <label for="nama_kegiatan" class="mt-4 text-white">Nama Kegiatan</label>
+    <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
 
-        <label for="email" class="self-start mt-2 ml-2 text-white max-md:ml-2.5">Timeline</label>
-        <input type="email" id="email" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50 max-md:px-5 max-md:max-w-full" aria-label="Masukkan email" />
+    <label for="deskripsi" class="mt-4 text-white">Deskripsi Kegiatan</label>
+    <input type="text" name="deskripsi" id="deskripsi" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
 
-        <label for="phone" class="self-start mt-2 ml-2 text-white max-md:ml-2.5">Lokasi</label>
-        <input type="tel" id="phone" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50 max-md:px-5 max-md:max-w-full" aria-label="Masukkan nomor HP" />
-        <label for="poster" class="self-start mt-4 text-white ml-3.5 max-md:ml-2.5">Poster</label>
-        <div class="flex flex-col items-start w-full max-md:max-w-full">
-        <div class="px-6 py-3 bg-white rounded-3xl shadow-md w-full h-auto max-md:h-32 max-md:px-4">
-            <input type="file" id="poster" class="hidden" accept="image/*" />
-            <label for="poster" class="flex items-center justify-between w-full px-4 py-3 cursor-pointer  text-gray-600 rounded-lg  focus:ring-2 focus:ring-cyan-500 focus:outline-none">
-            <span class="text-gray-500 text-sm font-medium">Upload Poster</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v4a2 2 0 002 2h12a2 2 0 002-2v-4M16 12l-4-4m0 0l-4 4m4-4v12" />
-            </svg>
-            </label>
-        </div>
-        </div>
+    <label for="tanggal_mulai" class="mt-4 text-white">Tanggal Mulai</label>
+    <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+    
+    <label for="tanggal_selesai" class="mt-4 text-white">Tanggal Selesai</label>
+    <input type="date" name="tanggal_selesai" id="tanggal_selesai" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+    
+    <label for="batas_pendaftaran" class="mt-4 text-white">Batas Pendaftaran</label>
+    <input type="date" name="batas_pendaftaran" id="batas_pendaftaran" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+    
+    <label for="kuota" class="mt-4 text-white">Kuota</label>
+    <input type="number" name="kuota" id="kuota" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
 
+    <label for="lokasi" class="mt-4 text-white">Lokasi</label>
+    <input type="text" name="lokasi" id="lokasi" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
 
-
-
-        <button type="submit" class="self-center px-4 py-2 mt-10 max-w-full text-white whitespace-nowrap bg-cyan-600 rounded-3xl w-[204px] max-md:px-5 max-md:mt-10 focus:outline-none focus:ring-2 focus:ring-cyan-700">
-          Simpan
-        </button>
-      </form>
-    </div>
-  </div>
+    <button type="submit" class="self-center px-4 py-2 mt-10 text-white bg-cyan-600 rounded-3xl focus:outline-none focus:ring-2 focus:ring-cyan-700">
+      Simpan
+    </button>
+  </form>
 </div>

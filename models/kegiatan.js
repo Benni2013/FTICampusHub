@@ -45,12 +45,13 @@ const Kegiatan = sequelize.define('Kegiatan', {
 
     status: { 
         type: DataTypes.ENUM('draft','published','closed','finished'), 
-        allowNull: false 
+        allowNull: false, 
+        defaultValue: 'published'
     },
 
     lokasi: { 
         type: DataTypes.STRING(255), 
-        allowNull: false 
+        allowNull: true 
     },
 }, {
     tableName: 'kegiatan',

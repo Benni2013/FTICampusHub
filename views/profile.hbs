@@ -1,0 +1,43 @@
+<form class="flex flex-col justify-center items-center self-center px-12 py-8 mt-20 max-w-full bg-gray-700 rounded-3xl w-[1500px] max-md:px-5 max-md:mt-10">
+  <div class="flex flex-col max-w-full w-[518px]">
+    <div class="flex flex-col self-center pt-8 pr-2 pl-8 bg-white rounded-full h-[150px] w-[150px] max-md:pl-5" role="group" aria-label="Profile picture upload">
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/16a9eb3cc10b5471b35570afba05e3dde31b68c6bf21d9d9ee255a454471b5ec?placeholderIfAbsent=true&apiKey=863c3774457247cf9941fba7937e9907"
+        class="object-contain self-center aspect-[0.98] w-[81px]"
+        alt="Current profile picture"
+      />
+      <button
+        type="button"
+        class="flex z-10 flex-col justify-center items-center self-end px-1.5 mt-2 -mb-1 bg-cyan-600 rounded-full h-[30px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[30px] focus:outline-none focus:ring-2 focus:ring-white"
+        aria-label="Upload new profile picture"
+      >
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9bab7ab21ed6684d7590dc392a9ff3b098b7ebffd936d3702129b8a3b1b80a7?placeholderIfAbsent=true&apiKey=863c3774457247cf9941fba7937e9907"
+          class="object-contain w-full aspect-square"
+          alt=""
+          aria-hidden="true"
+        />
+      </button>
+    </div>
+    <div class="flex flex-col mt-5">
+      <label for="name" class="self-start ml-3 text-l font-semibold text-white max-md:ml-2.5">Nama</label>
+      <input type="text" id="name" class="px-6 pt-4 pb-3 mt-2 text-xl whitespace-nowrap bg-white rounded-3xl text-zinc-600 focus:outline-none focus:ring-2 focus:ring-cyan-600 max-md:px-5 max-md:max-w-full" aria-required="true" />
+    </div>
+    <div class="flex flex-col mt-5">
+      <label for="email" class="self-start ml-3 text-l font-semibold text-white max-md:ml-2.5">Email</label>
+      <input type="email" id="email" class="px-6 pt-4 pb-3 mt-2 text-xl whitespace-nowrap bg-white rounded-3xl text-zinc-600 focus:outline-none focus:ring-2 focus:ring-cyan-600 max-md:px-5 max-md:max-w-full" aria-required="true" />
+    </div>
+    <div class="flex flex-col mt-5">
+      <label for="phone" class="self-start ml-3 text-l font-semibold text-white max-md:ml-2.5">No. Telp</label>
+      <input type="tel" id="phone" class="px-6 pt-4 pb-3 mt-2 text-xl bg-white rounded-3xl text-zinc-600 focus:outline-none focus:ring-2 focus:ring-cyan-600 max-md:px-5 max-md:max-w-full" aria-required="true" />
+    </div>
+    <button
+      type="submit"
+      class="self-center px-4 pt-3 pb-3 mt-8 max-w-full text-xl font-semibold text-white whitespace-nowrap bg-cyan-600 rounded-3xl w-[204px] hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-white max-md:px-5 max-md:mt-10"
+    >
+      Logout
+    </button>
+  </div>
+</form>
