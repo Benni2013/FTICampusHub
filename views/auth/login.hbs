@@ -1,19 +1,25 @@
-<div class="container">
-    <div class="form-container">
-      <h1>FTI Campus Hub</h1>
-      <p>Welcome Back! Please enter your details.</p>
-      <form action="/login" method="POST">
-        <input type="email" name="email" placeholder="Enter your email" required>
-        <input type="password" name="password" placeholder="Enter your password" required>
-        <a href="/forgot-password">Forgot your password?</a>
-        <button type="submit">Sign In</button>
-      </form>
-      <p>Don't have an account? <a href="/signup">Sign up for free</a></p>
-    </div>
-    <div class="image-container">
-      <div class="overlay"></div>
-      <div class="logo">
-        <h1>FTI Campus Hub</h1>
-      </div>
-    </div>
+  <div class="flex h-screen w-screen">
+          <div class="bg-gray-800 flex-0 p-10 text-white">
+              <h1 class="text-3xl font-bold mb-4">FTI Campus Hub</h1>
+              <p class="mb-8">Welcome Back! Please enter your details.</p>
+              
+              <div class="mb-4">
+                <form action="/login" method="POST" class="space-y-4"></form>
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-400">Email</label>
+                  <input type="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Email" required>
+              </div>
+              <div class="mb-6">
+                  <label for="password" class="block mb-2 text-sm font-medium text-gray-400">Password</label>
+                  <input type="password" id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Password" required>
+              </div>
+              <div class="flex items-center justify-between">
+                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Sign In</button>
+                  <a href="/forgot_password" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" >Forgot your password?</a>
+              </form>
+              </div>
+              
+              <div class="mt-4"> <p class="text-sm text-gray-400">Don't have an account? <a href="/register" class="text-blue-500 hover:text-blue-800">Sign up</a></p>
+              </div>
+          </div>
+          <div class="flex-1 bg-cover bg-center " style="background-image: url('/images/fti.png');"></div>
   </div>

@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const authRoutes = require('./authRoutes');
+const authRouter = require('./authRouter');
+const penyelenggaraRouter = require('./penyelenggaraRouter');
+const mahasiswaRouter = require('./mahasiswaRouter');
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
@@ -8,5 +11,8 @@ const authRoutes = require('./authRoutes');
 // });
 
 router.use('/', authRoutes);
+router.use('/', authRouter);
+router.use('/penyelenggara', penyelenggaraRouter);
+router.use('/mahasiswa', mahasiswaRouter);
 
 module.exports = router;
