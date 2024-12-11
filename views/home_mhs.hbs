@@ -1,13 +1,13 @@
-
-  <div class="flex flex-col w-full max-md:max-w-full">
+<div class="flex flex-col w-full max-md:max-w-full">
 
     <section class="flex flex-col self-end mt-2 mr-12 w-full max-w-[1066px] max-md:mr-2.5 max-md:max-w-full">
       <h2 class="self-start text-2xl font-bold leading-loose text-center text-indigo-950 max-md:ml-0.5">
-        Kegiatan Kampus
+        Kegiatan Kampus dan Volunteer
       </h2>
       <div class="mt-11 max-md:mt-10 max-md:max-w-full">
         <div class="flex gap-5 max-md:flex-col">
-          <article class="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
+          {{#each data.kegiatan }}
+            <article class="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
             <div class="flex flex-col grow pb-2 w-full bg-white rounded-xl border border-solid border-black border-opacity-10 max-md:mt-5">
               <img
                 loading="lazy"
@@ -17,10 +17,10 @@
               />
               <div class="flex flex-col px-8 items-start pr-2.5 pl-9 mt-7 w-full max-md:pl-5">
                 <h3 class="text-xl font-medium text-indigo-950 w-[281px]">
-                  Panitia LKMM-TD FTI 2023/2024
+                  {{ this.nama_kegiatan }}
                 </h3>
                 <p class="self-stretch mt-4 mb-8 text-xs text-indigo-950">
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                  {{ this.deskripsi }}
                 </p>
                 <div class="flex gap-5 justify-between mt-11 w-full max-md:mt-10">
                   <button
@@ -51,7 +51,9 @@
               </div>
             </div>
           </article>
-          <article class="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
+          {{/each}}
+          
+          {{!-- <article class="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
             <div class="flex flex-col grow pb-3.5 w-full bg-white rounded-xl border border-solid border-black border-opacity-10 max-md:mt-5">
               <img
                 loading="lazy"
@@ -116,7 +118,7 @@
           </article>
         </div>
       </div>
-      <button class="self-center mt-5 text-xl leading-3 text-center text-cyan-600" tabindex="0">Load more</button>
+      <button class="self-center mt-5 text-xl leading-3 text-center text-cyan-600" tabindex="0">Load more</button> --}}
       <h2 class="self-start mt-5 text-2xl font-bold leading-loose text-center text-indigo-950">
         Volunter
       </h2>
