@@ -46,18 +46,10 @@
                 <th scope="col" class="px-10 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                      Tanggal Berakhir
+                      Tanggal Selesai
                     </span>
                   </div>
                 </th>
-
-                {{!-- <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
-                      Penyelenggara
-                    </span>
-                  </div>
-                </th> --}}
 
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
@@ -73,20 +65,18 @@
 
             <tbody class="divide-y divide-gray-200">
               {{#each data.kegiatan }}
-                
-              {{/each}}
-              <tr class="bg-white hover:bg-gray-50">
+                  <tr class="bg-white hover:bg-gray-50">
                 <td class="size-px whitespace-nowrap">
                   <a type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
                     <span class="block px-6 py-2">
-                      <span class="font-mono text-sm text-blue-600">1 </span>
+                      <span class="font-mono text-sm text-blue-600">{{plus @index 1}}</span>
                     </span>
                   </a>
                 </td>
                 <td class="size-px whitespace-nowrap">
                   <a type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
                     <span class="block px-6 py-2">
-                      <span class="text-sm text-gray-600">Technofest</span>
+                      <span class="text-sm text-gray-600">{{this.nama_kegiatan}}</span>
                     </span>
                   </a>
                 </td>
@@ -94,7 +84,7 @@
                 <td class="size-px whitespace-nowrap">
                   <a type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
                     <span class="block px-6 py-2">
-                      <span class="text-sm text-gray-600">13 Jan 2023</span>
+                      <span class="text-sm text-gray-600">{{this.batas_pendaftaran}}</span>
                     </span>
                   </a>
                 </td>
@@ -102,7 +92,7 @@
                 <td class="size-px whitespace-nowrap">
                   <a type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
                     <span class="block px-6 py-2">
-                      <span class="text-sm text-gray-600">13 Jan 2023</span>
+                      <span class="text-sm text-gray-600">{{this.tanggal_mulai}}</span>
                     </span>
                   </a>
                 </td>
@@ -110,20 +100,13 @@
                 <td class="size-px whitespace-nowrap">
                   <a type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
                     <span class="block px-6 py-2">
-                      <span class="text-sm text-gray-600">13 Jan 2023</span>
+                      <span class="text-sm text-gray-600">{{this.tanggal_selesai}}</span>
                     </span>
                   </a>
                 </td>
 
-                {{!-- <td class="size-px whitespace-nowrap">
-                  <a type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
-                    <span class="block px-6 py-2">
-                      <span class="text-sm text-gray-600">BEM KM FTI UNAND</span>
-                    </span>
-                  </a>
-                </td> --}}
                 <td class="size-px whitespace-nowrap">
-                  <a href="kelola_pendaftaran/pendaftar">
+                  <a href="kelola_pendaftaran/pendaftar?penyelenggara={{../data.penyelenggara.penyelenggara_id}}&kegiatan={{this.kegiatan_id}}">
                     <span class="px-6 py-1.5">
                       <span
                         class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm"
@@ -141,7 +124,7 @@
                     </span>
                   </a>
                 </td>
-              </tr>
+              {{/each}}
               
 
             </tbody>
@@ -152,12 +135,12 @@
           <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
             <div>
               <p class="text-sm text-gray-600">
-                <span class="font-semibold text-gray-800">9</span>
+                <span class="font-semibold text-gray-800">{{data.kegiatan.length}}</span>
                 results
               </p>
             </div>
 
-            <div>
+            {{!-- <div>
               <div class="inline-flex gap-x-2">
                 <button
                   type="button"
@@ -179,7 +162,7 @@
                   </svg>
                 </button>
               </div>
-            </div>
+            </div> --}}
           </div>
           <!-- End Footer -->
         </div>

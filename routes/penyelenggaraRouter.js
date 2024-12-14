@@ -1,7 +1,7 @@
 // Router Penyelenggara
 var express = require('express');
 var router = express.Router();
-const { Penyelenggara, Kegiatan } = require('../models/RelasiTabel');
+const { Penyelenggara, Kegiatan, Pendaftaran, Users } = require('../models/RelasiTabel');
 const { where } = require('sequelize');
 const { Op } = require('sequelize');
 
@@ -72,7 +72,10 @@ router.get('/kelola_pendaftaran', async (req, res, next) => {
         let penyelenggara_id = req.query.penyelenggara;
         const penyelenggara = await Penyelenggara.findByPk(penyelenggara_id);
 
-        const kegiatan = await Kegiatan.findAll();
+        const kegiatan = await Kegiatan.findAll({
+            where:
+            {penyelenggara_id}
+        });
 
         res.render('./kelola_pendaftaran_admin.hbs', { 
             title: 'Kelola Pendaftaran', 
@@ -89,17 +92,47 @@ router.get('/kelola_pendaftaran/pendaftar', async (req, res, next) => {
     
     try {
         let penyelenggara_id = req.query.penyelenggara;
+        let kegiatan_id = req.query.kegiatan;
+
         const penyelenggara = await Penyelenggara.findByPk(penyelenggara_id);
 
+        const kegiatan = await Kegiatan.findByPk(kegiatan_id);
+
+        const pendaftar = await Pendaftaran.findAll(
+            {
+                where: {kegiatan_id},
+                include: [
+                    { model: Users,
+                        attributes: ['nim', 'nama', 'email', 'no_telp']
+                     },  // Gunakan object untuk include
+                    { model: Kegiatan }
+                ],
+                order: [['waktu_daftar', 'ASC']]
+            }
+        );
+
+        let dataPendaftaran = pendaftar.map(item => ({
+            nim: item.Users.nim,
+            nama: item.Users.nama,
+            email: item.Users.email,
+            no_telp: item.Users.no_telp,
+            alamat: item.alamat,
+            nama_kegiatan: item.Kegiatan.nama_kegiatan,
+            waktu_daftar: item.waktu_daftar,
+            jabatan: item.jabatan,
+            alasan: item.alasan_pendaftaran
+        }));
+
+        console.log(dataPendaftaran);
 
         res.render('./pendaftar_admin.hbs', { 
-            title: 'Kelola Pendaftaran', 
+            title: 'Kelola Pendaftaran ' + kegiatan.nama_kegiatan, 
             layout: "layouts/main_admin",
-            data: {penyelenggara}
+            data: {penyelenggara, pendaftar}
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Server error occurred \n' + error});
+        res.status(500).json({ error: 'Server error occurred ' + error});
     }
 });
 
