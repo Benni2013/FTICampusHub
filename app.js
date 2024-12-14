@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser = require('body-parser');
+const hbs = require('hbs');
 
 // Inisialisasi Express
 var app = express();
@@ -42,6 +43,10 @@ app.use('/sertifikat', sertifikatRoutes);
 app.use('/profile', profileRoutes);
 
 
+// Registrasi helper
+hbs.registerHelper('plus', function(value) {
+  return value + 1;
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

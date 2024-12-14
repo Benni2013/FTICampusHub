@@ -2,33 +2,40 @@
   {{#if error}}
     <p class="text-red-500">{{error}}</p>
   {{/if}}
-  <form method="POST" action="/kegiatan/tambah" class="flex flex-col px-12 py-10 mt-20 bg-gray-700 rounded-3xl w-full text-xl font-semibold">
-    <label for="penyelenggara_id" class="mt-4 text-white">ID Penyelenggara</label>
-    <input type="number" name="penyelenggara_id" id="penyelenggara_id" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+  <div>
+    <form method="POST" action="/kegiatan/tambah" enctype="multipart/form-data" class="flex flex-col px-12 py-10 mt-20 bg-gray-700 rounded-3xl w-full text-xl font-semibold">
+      <label for="nama_kegiatan" class="mt-4 text-white">Nama Kegiatan</label>
+      <input type="text" id="nama_kegiatan" name="nama_kegiatan" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" aria-label="Masukkan nama kegiatan" />
 
-    <label for="nama_kegiatan" class="mt-4 text-white">Nama Kegiatan</label>
-    <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+      <label for="deskripsi" class="mt-4 text-white">Deskripsi Kegiatan</label>
+      <input type="text" id="deskripsi" name="deskripsi" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" aria-label="Masukkan deskripsi kegiatan" />
 
-    <label for="deskripsi" class="mt-4 text-white">Deskripsi Kegiatan</label>
-    <input type="text" name="deskripsi" id="deskripsi" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+      <label for="tanggal_mulai" class="mt-4 text-white">Tanggal Pendaftaran</label>
+      <input type="date" id="tanggal_mulai" name="tanggal_mulai" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" aria-label="Masukkan tanggal mulai pendaftaran" />
 
-    <label for="tanggal_mulai" class="mt-4 text-white">Tanggal Mulai</label>
-    <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
-    
-    <label for="tanggal_selesai" class="mt-4 text-white">Tanggal Selesai</label>
-    <input type="date" name="tanggal_selesai" id="tanggal_selesai" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
-    
-    <label for="batas_pendaftaran" class="mt-4 text-white">Batas Pendaftaran</label>
-    <input type="date" name="batas_pendaftaran" id="batas_pendaftaran" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
-    
-    <label for="kuota" class="mt-4 text-white">Kuota</label>
-    <input type="number" name="kuota" id="kuota" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+      <label for="tanggal_selesai" class="mt-4 text-white">Tanggal Selesai Kegiatan</label>
+      <input type="date" id="tanggal_selesai" name="tanggal_selesai" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" aria-label="Masukkan tanggal selesai kegiatan" />
 
-    <label for="lokasi" class="mt-4 text-white">Lokasi</label>
-    <input type="text" name="lokasi" id="lokasi" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" />
+      <label for="batas_pendaftaran" class="mt-4 text-white">Tanggal Penutupan Pendaftaran</label>
+      <input type="date" id="batas_pendaftaran" name="batas_pendaftaran" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" aria-label="Masukkan tanggal batas pendaftaran" />
 
-    <button type="submit" class="self-center px-4 py-2 mt-10 text-white bg-cyan-600 rounded-3xl focus:outline-none focus:ring-2 focus:ring-cyan-700">
-      Simpan
-    </button>
-  </form>
+      <label for="kuota" class="mt-4 text-white">kuota Panitia</label>
+      <input type="number" id="kuota" name="kuota" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" aria-label="Masukkan kuota panitia" />
+
+      <label for="poster" class="mt-4 text-white">Poster</label>
+      <div class="flex items-center justify-between px-6 py-3 bg-white rounded-3xl shadow-md">
+        <input type="file" id="poster" name="poster" class="hidden" accept="image/*" />
+        <label for="poster" class="flex items-center justify-between w-full px-4 py-3 cursor-pointer text-gray-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+          <span class="text-gray-500 text-sm font-medium">Upload Poster</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v4a2 2 0 002 2h12a2 2 0 002-2v-4M16 12l-4-4m0 0l-4 4m4-4v12" />
+          </svg>
+        </label>
+      </div>
+
+      <button type="submit" class="self-center px-4 py-2 mt-10 text-white bg-cyan-600 rounded-3xl focus:outline-none focus:ring-2 focus:ring-cyan-700">
+        Simpan
+      </button>
+    </form>
+  </div>
 </div>

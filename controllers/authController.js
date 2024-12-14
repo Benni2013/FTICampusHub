@@ -53,44 +53,43 @@ exports.login = async (req, res) => {
         { expiresIn: '1h' }
       );
 
-      return res.json({
+      console.log({
         message: 'Login successful as Organizer',
         token,
         role: 'organizer',
-        penyelenggara: {
-          id: penyelenggara.penyelenggara_id,
-          nama: penyelenggara.nama_penyelenggara,
-          email: penyelenggara.email,
-          jenis: penyelenggara.jenis,
-        },
+        penyelenggara
       });
+
+      res.redirect(`/penyelenggara/home?penyelenggara=${penyelenggara.penyelenggara_id}`)
+
+      
     }
+    else {
+          // Validasi password untuk Users
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+          return res.status(401).json({ error: 'Email dan Password Salah' });
+        }
 
-    // Validasi password untuk Users
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Email dan Password Salah' });
+        // Generate JWT untuk Users
+        const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET, {
+          expiresIn: '1h',
+        });
+
+        console.log({
+          message: 'Login successful as User',
+          token,
+          role: 'user',
+          user: {
+            id: user.user_id,
+            nama: user.nama,
+            email: user.email,
+            role: user.role,
+          },
+        })
+
+        res.redirect(`/mahasiswa/home?user=${user.user_id}`);
     }
-
-    // Generate JWT untuk Users
-    const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
-    });
-
-    console.log({
-      message: 'Login successful as User',
-      token,
-      role: 'user',
-      user: {
-        id: user.user_id,
-        nama: user.nama,
-        email: user.email,
-        role: user.role,
-      },
-    })
-
-    res.redirect(`/mahasiswa/home?user=${user.user_id}`);
-
 
   } catch (error) {
     console.error(error);
