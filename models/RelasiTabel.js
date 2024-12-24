@@ -1,9 +1,9 @@
 const sequelize = require('../config/sequelize');
 const Users = require('./Users');
 const Penyelenggara = require('./Penyelenggara');
-const Kegiatan = require('./Kegiatan');
+const Kegiatan = require('./kegiatan');
 const PanitiaKegiatan = require('./PanitiaKegiatan');
-const Pendaftaran = require('./Pendaftaran');
+const Pendaftaran = require('./pendaftaran');
 const Sertifikat = require('./Sertifikat');
 const Pengumuman = require('./Pengumuman');
 

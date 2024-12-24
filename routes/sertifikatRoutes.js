@@ -1,13 +1,17 @@
 const express = require('express');
 const PDFDocument = require('pdfkit');
 const router = express.Router();
-const { Sertifikat } = require('../models/RelasiTabel'); // Pastikan model Sertifikat sudah benar
+const { Sertifikat, PanitiaKegiatan } = require('../models/RelasiTabel'); // Pastikan model Sertifikat sudah benar
 
 // Route untuk mendapatkan data sertifikat
 router.get('/', async (req, res) => {
   try {
     // Ambil semua data sertifikat
-    const sertifikatList = await Sertifikat.findAll();
+    const sertifikatList = await Sertifikat.findAll({
+      include: {
+        model: PanitiaKegiatan
+      }
+    });
 
     // Render halaman sertifikat dengan data
     res.render('sertifikat', { sertifikatList });
