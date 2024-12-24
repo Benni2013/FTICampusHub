@@ -5,6 +5,7 @@
     <div class="-m-1.5 overflow-x-auto">
       <div class="p-1 min-w-full inline-block align-middle">
         <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+          
 
           <!-- Table -->
           <table class="min-w-full divide-y divide-gray-200">
@@ -50,7 +51,21 @@
                     </span>
                   </div>
                 </th>
+                <th scope="col" class="px-10 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
+                      Status
+                    </span>
+                  </div>
+                </th>
 
+                <th scope="col" class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
+                      Lihat
+                    </span>
+                  </div>
+                </th>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
@@ -104,6 +119,13 @@
                     </span>
                   </a>
                 </td>
+                <td class="size-px whitespace-nowrap">
+                  <a type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
+                    <span class="block px-6 py-2">
+                      <span class="text-sm text-gray-600">{{this.status}}</span>
+                    </span>
+                  </a>
+                </td>
 
                 <td class="size-px whitespace-nowrap">
                   <a href="kelola_pendaftaran/pendaftar?penyelenggara={{../data.penyelenggara.penyelenggara_id}}&kegiatan={{this.kegiatan_id}}">
@@ -123,6 +145,17 @@
                       </span>
                     </span>
                   </a>
+                </td>
+                <td>
+                  <form action="kelolakegiatan?penyelenggara={{../data.penyelenggara.penyelenggara_id}}&kegiatan={{this.kegiatan_id}}" method="POST">
+                  <input type="hidden" name="kegiatan_id" value="{{this.kegiatan_id}}" />
+                  <button class="px-3 py-2 bg-green-500 text-white rounded" name="action" value="confirm" type="submit">
+                        Tutup
+                      </button>
+                      <button class="px-3 py-2 bg-red-500 text-white rounded" name="action" value="late" type="submit">
+                        Selesai
+                      </button>
+                  </form>
                 </td>
               {{/each}}
               

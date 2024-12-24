@@ -3,7 +3,7 @@
     <p class="text-red-500">{{error}}</p>
   {{/if}}
   <div>
-    <form method="POST" action="/kegiatan/tambah" enctype="multipart/form-data" class="flex flex-col px-12 py-10 mt-20 bg-gray-700 rounded-3xl w-full text-xl font-semibold">
+    <form method="POST" action="/kegiatan/tambah" class="flex flex-col px-12 py-10 mt-20 bg-gray-700 rounded-3xl w-full text-xl font-semibold">
       <label for="nama_kegiatan" class="mt-4 text-white">Nama Kegiatan</label>
       <input type="text" id="nama_kegiatan" name="nama_kegiatan" class="px-8 pt-3 mt-1 bg-white rounded-3xl text-black-800 text-opacity-50" aria-label="Masukkan nama kegiatan" />
 
@@ -32,6 +32,7 @@
           </svg>
         </label>
       </div>
+      <input type="hidden" name="penyelenggara_id" value="{{data.penyelenggara_id}}" />
 
       <button type="submit" class="self-center px-4 py-2 mt-10 text-white bg-cyan-600 rounded-3xl focus:outline-none focus:ring-2 focus:ring-cyan-700">
         Simpan
