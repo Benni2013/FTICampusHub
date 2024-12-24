@@ -40,7 +40,7 @@ app.use('/kegiatan', kegiatanRoutes);
 app.use('/pengumuman', pengumumanRoutes);
 app.use('/riwayat', riwayatRoutes);
 app.use('/sertifikat', sertifikatRoutes);
-app.use('/profile', profileRoutes);
+app.use('/', profileRoutes);
 
 
 // Registrasi helper

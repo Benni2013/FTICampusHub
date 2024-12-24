@@ -3,8 +3,8 @@
     <div class="flex justify-center items-center w-full h-[150px] mb-4">
       <!-- Profile Picture Container -->
       <div class="relative w-[150px] h-[150px] rounded-full overflow-hidden border-4 border-white">
-        {{#if data.user.pp_path}}
-        <img src="/pp_mahasiswa/{{ data.user.pp_path }}"
+        {{#if data.penyelenggara.logo_path}}
+        <img src="/pp_penyelenggara/{{ data.penyelenggara.logo_path }}"
              class="absolute top-0 left-0 w-full h-full object-cover"
              alt="Current profile picture">
         {{else}}
@@ -28,34 +28,36 @@
         />
 
       </button> --}}
+      <!-- Ganti button upload dengan button edit -->
       <button type="button" class="absolute bottom-0 right-0 p-2 bg-cyan-600 rounded-full text-white shadow-lg">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9bab7ab21ed6684d7590dc392a9ff3b098b7ebffd936d3702129b8a3b1b80a7?placeholderIfAbsent=true&apiKey=863c3774457247cf9941fba7937e9907"
-          class="object-contain w-full aspect-square"
-          alt=""
-          aria-hidden="true"
-        /> <!-- Assuming Font Awesome is used -->
+        <a href="/edit-profile-admin?penyelenggara={{data.penyelenggara.penyelenggara_id}}">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9bab7ab21ed6684d7590dc392a9ff3b098b7ebffd936d3702129b8a3b1b80a7?placeholderIfAbsent=true&apiKey=863c3774457247cf9941fba7937e9907"
+            class="object-contain w-full aspect-square"
+            alt="Edit profile"
+          />
+        </a>
       </button>
     </div>
   </div>
   <!-- Name Field -->
   <div class="w-full mb-4">
-    <label for="name" class="block text-sm font-semibold text-white mb-2">Nama:</label>
-    <input type="text" id="name" value="{{ data.user.nama }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <label for="name" class="block text-sm font-semibold text-white mb-2">Nama Penyelenggara:</label>
+    <input type="text" id="name" value="{{ data.penyelenggara.nama_penyelenggara }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
   </div>
   <!-- Email Field -->
   <div class="w-full mb-4">
     <label for="email" class="block text-sm font-semibold text-white mb-2">Email:</label>
-    <input type="email" id="email" value="{{ data.user.email }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <input type="email" id="email" value="{{ data.penyelenggara.email }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
   </div>
   <!-- Phone Field -->
   <div class="w-full mb-6">
     <label for="phone" class="block text-sm font-semibold text-white mb-2">No. Telp:</label>
-    <input type="tel" id="phone" value="{{ data.user.no_telp }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <input type="tel" id="phone" value="{{ data.penyelenggara.no_telp }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
   </div>
   <!-- Logout Button -->
-  {{!-- <button type="submit" class="w-full p-3 bg-cyan-600 text-white font-semibold rounded-xl hover:bg-cyan-700 transition-colors"> --}}
-    <a class="text-center w-full p-3 bg-cyan-600 text-white font-semibold rounded-xl hover:bg-cyan-700 transition-colors" href="/logout">Logout</a>
-  {{!-- </button> --}}
+  <button type="submit" class="w-full p-3 bg-cyan-600 text-white font-semibold rounded-xl hover:bg-cyan-700 transition-colors">
+    <a href="/logout">Logout</a>
+  </button>
 </form>

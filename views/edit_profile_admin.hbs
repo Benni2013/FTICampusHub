@@ -1,0 +1,94 @@
+<div class="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+  <form action="/update-profile-admin" method="POST" enctype="multipart/form-data" class="w-full max-w-[600px] bg-gray-700 rounded-3xl shadow-lg p-8">
+    <input type="hidden" name="penyelenggara_id" value="{{ data.penyelenggara.penyelenggara_id }}">
+    
+    <div class="flex justify-center mb-8">
+      <div class="relative">
+        <div class="w-[150px] h-[150px] rounded-full overflow-hidden border-4 border-white">
+          {{#if data.penyelenggara.logo_path}}
+            <img id="preview" src="/pp_penyelenggara/{{ data.penyelenggara.logo_path }}" 
+                 class="w-full h-full object-cover" alt="Profile picture">
+          {{else}}
+            <img id="preview" src="/pp_mahasiswa/pp_mahasiswa_default.png" 
+                 class="w-full h-full object-cover" alt="Default profile picture">
+          {{/if}}
+        </div>
+        <label for="logo" class="absolute bottom-0 right-0 p-2 bg-cyan-600 rounded-full text-white shadow-lg cursor-pointer hover:bg-cyan-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+          </svg>
+        </label>
+        <input type="file" id="logo" name="logo" class="hidden" accept="image/*" onchange="previewImage(this)">
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-white mb-1">Nama Penyelenggara</label>
+        <input type="text" name="nama_penyelenggara" value="{{ data.penyelenggara.nama_penyelenggara }}" 
+               class="w-full p-3 rounded-xl bg-white text-gray-800" required>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-white mb-1">Email</label>
+        <input type="email" name="email" value="{{ data.penyelenggara.email }}" 
+               class="w-full p-3 rounded-xl bg-white text-gray-800" required>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-white mb-1">No. Telp</label>
+        <input type="tel" name="no_telp" value="{{ data.penyelenggara.no_telp }}" 
+               class="w-full p-3 rounded-xl bg-white text-gray-800">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-white mb-1">Deskripsi</label>
+        <textarea name="deskripsi" class="w-full p-3 rounded-xl bg-white text-gray-800" rows="4">{{ data.penyelenggara.deskripsi }}</textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-white mb-1">Password Lama</label>
+        <input type="password" name="old_password" 
+               class="w-full p-3 rounded-xl bg-white text-gray-800" required>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-white mb-1">Password Baru (Opsional)</label>
+        <input type="password" name="new_password" 
+               class="w-full p-3 rounded-xl bg-white text-gray-800">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-white mb-1">Konfirmasi Password Baru</label>
+        <input type="password" name="confirm_password" 
+               class="w-full p-3 rounded-xl bg-white text-gray-800">
+      </div>
+
+      {{#if error}}
+        <div class="text-red-500 text-sm">{{error}}</div>
+      {{/if}}
+
+      <div class="flex gap-4 mt-6">
+        <button type="submit" class="flex-1 bg-cyan-600 text-white p-3 rounded-xl font-semibold hover:bg-cyan-700">
+          Simpan Perubahan
+        </button>
+        <a href="/ProfileAdm?penyelenggara={{ data.penyelenggara.penyelenggara_id }}" 
+           class="flex-1 bg-gray-500 text-white p-3 rounded-xl font-semibold text-center hover:bg-gray-600">
+          Batal
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+function previewImage(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('preview').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
