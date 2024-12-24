@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Pastikan konfigurasi sequelize benar
+const sequelize = require('../config/sequelize'); // Pastikan konfigurasi sequelize benar
 
 // PENYELENGGARA Model
 const Penyelenggara = sequelize.define('Penyelenggara', {

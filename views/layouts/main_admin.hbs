@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTICampusHub</title>
+    <!-- Font & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <!-- CSS Library -->
+    <link rel="stylesheet" href="https://preline.co/assets/css/main.min.css?v=1.0.0">
+    
+</head>
+<body class="bg-gray-50 dark:bg-neutral-900">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="sidebar w-64 min-h-screen">
+            <div>
+                <h1 class="text-2xl font-bold mb-10 px-5 pt-5">FTICampusHub</h1>
+                <nav aria-label="Main Navigation">
+                    <a href="/penyelenggara/home?penyelenggara={{data.penyelenggara.penyelenggara_id}}" class="sidebar-link">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/11f7aa906ef38321e109189976b055703071b5f80cd182b30e05b7080af1f636" class="w-4 h-auto" alt="Home Icon">
+                        <span>Home</span>
+                    </a>
+                    <a href="/penyelenggara/informasi_kegiatan?penyelenggara={{data.penyelenggara.penyelenggara_id}}" class="sidebar-link">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/73c8c4e63f7b33d7f8e28967d5174446d18cee323bcf267cfcf16443168d95c4" class="w-4 h-auto" alt="Announcements Icon">
+                        <span>Informasi Kegiatan</span>
+                    </a>
+                    <a href="/penyelenggara/kelola_pendaftaran?penyelenggara={{data.penyelenggara.penyelenggara_id}}" class="sidebar-link">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/84b52c7a24627cd0dcb4530f0dfcb2e69797a8cf450f714a6e266b6fb2925224" class="w-4 h-auto" alt="Registration Icon">
+                        <span>Kelola Pendaftaran</span>
+                    </a>
+                    <a href="/penyelenggara/sertifikat?penyelenggara={{data.penyelenggara.penyelenggara_id}}" class="sidebar-link">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/84b52c7a24627cd0dcb4530f0dfcb2e69797a8cf450f714a6e266b6fb2925224" class="w-4 h-auto" alt="Certificate Icon">
+                        <span>Sertifikat</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <nav class="navbar bg-white shadow px-5 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold">{{title}}</h2>
+                <div class="flex items-center gap-4 relative">
+                    <span class="font-medium text-gray-800">{{ data.penyelenggara.nama_penyelenggara }}</span>
+                    {{!-- <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1068ced74a496647246be5820b9c8a9773d19a8b32e9eb66dffaa28b75fe600c" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="//toggleDropdown()"> --}}
+                    {{#if data.penyelenggara.logo_path}}
+                        <img src="/pp_penyelenggara/{{ data.penyelenggara.logo_path }}" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
+                    {{else}}
+                        <img src="/pp_mahasiswa/pp_mahasiswa_default.png" class="w-10 h-10 rounded-full cursor-pointer" alt="Carlos López" onclick="toggleDropdown()">
+                    {{/if}}
+                    <!-- Dropdown Menu -->
+                    <div id="profileDropdown" class="hidden absolute right-0 mt-20 bg-white shadow-lg rounded z-50">
+                        <a href="/ProfileAdm?penyelenggara={{ data.penyelenggara.penyelenggara_id }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                        <a href="/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                    </div>
+                </div>
+            </nav>
+            <main class="p-5">
+                {{{body}}}
+            </main>
+        </div>
+    </div>
+    <!-- JS Plugins -->
+    <script src="https://preline.co/assets/vendor/preline/dist/index.js?v=1.0.0"></script>
+    <script>
+        // Function to toggle the visibility of the dropdown
+        function toggleDropdown() {
+            var dropdown = document.getElementById("profileDropdown");
+            // Toggle the 'hidden' class instead of adding/removing explicitly
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Click outside to close dropdown
+        window.onclick = function(event) {
+            // Check if the clicked element is not the dropdown toggle button
+            if (!event.target.matches('.w-10.h-10.rounded-full.cursor-pointer')) {
+                // Retrieve the dropdown element
+                var dropdown = document.getElementById("profileDropdown");
+                // If dropdown is open and the clicked target is outside, hide the dropdown
+                if (!dropdown.classList.contains('hidden') && !dropdown.contains(event.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

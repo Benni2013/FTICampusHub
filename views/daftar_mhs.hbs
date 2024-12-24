@@ -1,0 +1,35 @@
+<div class="flex flex-col items-center w-full px-4 py-4">
+    <div class="w-full bg-gray-700 text-white rounded-xl shadow-md p-4">
+        <h2 class="text-lg font-semibold mb-4">{{ data.kegiatan.nama_kegiatan }}</h2>
+        <form action="/pendaftaran/daftar?user={{ data.user.user_id }}&kegiatan={{ data.kegiatan.kegiatan_id }}" method="POST" class="flex flex-col w-full">
+            <div class="flex flex-col gap-2 mb-3">
+                <label for="nama" class="font-medium">Nama</label>
+                <input value="{{ data.user.nama }}" name="nama" type="text" id="nama" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan nama" />
+            </div>
+
+            <div class="flex flex-col gap-2 mb-3">
+                <label for="email" class="font-medium">Email</label>
+                <input value="{{ data.user.email }}" name="email" type="email" id="email" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan email" />
+            </div>
+
+            <div class="flex flex-col gap-2 mb-3">
+                <label for="alamat" class="font-medium">Alamat</label>
+                <input name="alamat" type="text" id="alamat" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan alamat" required />
+            </div>
+
+            <div class="flex flex-col gap-2 mb-3">
+                <label for="jabatan" class="font-medium">Jabatan</label>
+                <input name="jabatan" type="text" id="jabatan" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan jabatan" required />
+            </div>
+
+            <div class="flex flex-col gap-2 mb-4">
+                <label for="alasan_pendaftaran" class="font-medium">Alasan dan Pengalaman</label>
+                <textarea name="alasan_pendaftaran" id="alasan_pendaftaran" class="bg-white rounded-lg p-2 text-black" aria-label="Masukkan alasan dan pengalaman" required></textarea>
+            </div>
+
+            <button type="submit" class="bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg px-4 py-2">
+                Daftar
+            </button>
+        </form>
+    </div>
+</div>

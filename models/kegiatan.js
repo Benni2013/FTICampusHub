@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Pastikan konfigurasi sequelize benar
+const sequelize = require('../config/sequelize'); // Pastikan konfigurasi sequelize benar
 
 // KEGIATAN Model
 const Kegiatan = sequelize.define('Kegiatan', {
@@ -45,12 +45,13 @@ const Kegiatan = sequelize.define('Kegiatan', {
 
     status: { 
         type: DataTypes.ENUM('draft','published','closed','finished'), 
-        allowNull: false 
+        allowNull: false, 
+        defaultValue: 'published'
     },
 
     lokasi: { 
         type: DataTypes.STRING(255), 
-        allowNull: false 
+        allowNull: true 
     },
 }, {
     tableName: 'kegiatan',

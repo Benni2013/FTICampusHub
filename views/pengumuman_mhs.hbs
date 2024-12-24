@@ -1,0 +1,56 @@
+<div>
+
+  <!-- Card -->
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1 min-w-full inline-block align-middle">
+        <h2 class="self-start text-2xl font-bold leading-loose text-indigo-950 max-md:ml-0.5">
+            Pendaftaran Kegiatan Kampus dan Volunteer
+          </h2>
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+
+          <!-- Table -->
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">No.</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">Nama Kegiatan</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">Waktu Pendaftaran</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">Penyelenggara</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">Jabatan</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-800 uppercase tracking-wider">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+               {{#each data.dataPendaftaran}}
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600">{{plus @index 1}}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{nama_kegiatan}}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{waktu_daftar}}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{nama_penyelenggara}}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{jabatan}}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">{{status}}</span>
+                            </td>
+                        </tr>
+                        {{/each}}
+              
+            </tbody>
+          </table>
+          <!-- End Table -->
+
+          <!-- Footer -->
+          <div class="px-6 py-4 flex justify-between items-center border-t border-gray-200">
+            <p class="text-sm text-gray-600">
+              <span class="font-semibold text-gray-800">{{data.dataPendaftaran.length}}</span> results
+            </p>
+          </div>
+          <!-- End Footer -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Card -->
+
+</div>

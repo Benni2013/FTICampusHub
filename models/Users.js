@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Pastikan konfigurasi sequelize benar
+const sequelize = require('../config/sequelize'); // Pastikan konfigurasi sequelize benar
 
 // USERS Model
 const Users = sequelize.define('Users', {
@@ -15,7 +15,7 @@ const Users = sequelize.define('Users', {
     },
 
     nim: { 
-        type: DataTypes.STRING(50) 
+        type: DataTypes.STRING(50)
     },
 
     email: { 
@@ -35,11 +35,12 @@ const Users = sequelize.define('Users', {
 
     role: { 
         type: DataTypes.ENUM('mahasiswa','panitia'), 
-        allowNull: false 
+        allowNull: true 
     },
 
     pp_path: { 
-        type: DataTypes.STRING(255) 
+        type: DataTypes.STRING(255),
+        allowNull: true
     },
 }, {
     tableName: 'users',
