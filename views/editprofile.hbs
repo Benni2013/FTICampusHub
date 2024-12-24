@@ -1,4 +1,4 @@
-<form class="flex flex-col justify-center items-center self-center px-8 py-7  bg-gray-700 rounded-3xl shadow-lg w-full max-w-[500px]">
+<form action="editprofile?user={{ data.user.user_id }}" method="POST" class="flex flex-col justify-center items-center self-center px-8 py-7  bg-gray-700 rounded-3xl shadow-lg w-full max-w-[500px]">
   <div class="relative w-full mb-5">
     <div class="flex justify-center items-center w-full h-[150px] mb-4">
       <!-- Profile Picture Container -->
@@ -28,34 +28,34 @@
         />
 
       </button> --}}
-      <a type="button" href="/editprofile?user={{ data.user.user_id }}" class="absolute bottom-0 right-0 p-2 bg-cyan-600 rounded-full text-white shadow-lg">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9bab7ab21ed6684d7590dc392a9ff3b098b7ebffd936d3702129b8a3b1b80a7?placeholderIfAbsent=true&apiKey=863c3774457247cf9941fba7937e9907"
-          class="object-contain w-full aspect-square"
-          alt=""
-          aria-hidden="true"
-        /> <!-- Assuming Font Awesome is used -->
-      </a>
+      
     </div>
   </div>
   <!-- Name Field -->
   <div class="w-full mb-4">
     <label for="name" class="block text-sm font-semibold text-white mb-2">Nama:</label>
-    <input type="text" id="name" value="{{ data.user.nama }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <input type="text"  value="{{ data.user.nama }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <input type="hidden" name="nama" value="{{data.user.nama}}" />
   </div>
   <!-- Email Field -->
   <div class="w-full mb-4">
     <label for="email" class="block text-sm font-semibold text-white mb-2">Email:</label>
-    <input type="email" id="email" value="{{ data.user.email }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <input type="email"  value="{{ data.user.email }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <input type="hidden" name="email" value="{{data.user.email}}" />
+  </div>
+  <div class="w-full mb-4">
+    <label for="email" class="block text-sm font-semibold text-white mb-2">Nim:</label>
+    <input type="text"  value="{{ data.user.nim }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <input type="hidden" name="nim" value="{{data.user.nim}}" />
   </div>
   <!-- Phone Field -->
   <div class="w-full mb-6">
-    <label for="phone" class="block text-sm font-semibold text-white mb-2">No. Telp:</label>
-    <input type="tel" id="phone" value="{{ data.user.no_telp }}" class="w-full p-3 rounded-xl bg-white text-gray-800" disabled>
+    <label for="no_telp" class="block text-sm font-semibold text-white mb-2">No. Telp:</label>
+    <input type="text" id="no_telp" name="no_telp" value="{{ data.user.no_telp }}" class="w-full p-3 rounded-xl bg-white text-gray-800">
   </div>
   <!-- Logout Button -->
   <button type="submit" class="w-full p-3 bg-cyan-600 text-white font-semibold rounded-xl hover:bg-cyan-700 transition-colors">
-    <a href="/">Logout</a>
+    Simpan
   </button>
+
 </form>

@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 const { Users, Kegiatan, Pendaftaran, Penyelenggara } = require('../models/RelasiTabel');
+const { where } = require('sequelize');
 
 router.get('/home', async (req, res, next) => {
     try {
@@ -9,6 +10,9 @@ router.get('/home', async (req, res, next) => {
         let user = await Users.findOne({ where: { user_id } });
 
         let kegiatan = await Kegiatan.findAll();
+        const pengumuman = await Kegiatan.findAll({
+            where: { status: "closed"},
+          });
 
         res.render('./home_mhs.hbs', { 
             title: 'Dashboard Mahasiswa', 
@@ -19,7 +23,6 @@ router.get('/home', async (req, res, next) => {
         console.error(error);
         res.status(500).json({ error: 'Server error occurred' });
     }
-    
 });
 
 

@@ -14,6 +14,14 @@ const tambahKegiatan = async (req, res) => {
       lokasi,
     } = req.body;
 
+    console.log("-------------- "+penyelenggara_id,
+      nama_kegiatan,
+      deskripsi,
+      tanggal_mulai,
+      tanggal_selesai,
+      batas_pendaftaran,
+      kuota,
+      lokasi,)
     // Validasi data wajib
     if (
       !penyelenggara_id ||

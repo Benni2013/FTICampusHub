@@ -4,12 +4,12 @@
         <form action="/pendaftaran/daftar?user={{ data.user.user_id }}&kegiatan={{ data.kegiatan.kegiatan_id }}" method="POST" class="flex flex-col w-full">
             <div class="flex flex-col gap-2 mb-3">
                 <label for="nama" class="font-medium">Nama</label>
-                <input value="{{ data.user.nama }}" name="nama" type="text" id="nama" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan nama" />
+                <input value="{{ data.user.nama }}" name="nama" type="text" id="nama" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan nama" disabled/>
             </div>
 
             <div class="flex flex-col gap-2 mb-3">
                 <label for="email" class="font-medium">Email</label>
-                <input value="{{ data.user.email }}" name="email" type="email" id="email" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan email" />
+                <input value="{{ data.user.email }}" name="email" type="email" id="email" class="bg-white rounded-lg text-black text-opacity-75" aria-label="Masukkan email" disabled />
             </div>
 
             <div class="flex flex-col gap-2 mb-3">
