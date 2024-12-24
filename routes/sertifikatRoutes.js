@@ -1,19 +1,14 @@
 const express = require('express');
 const PDFDocument = require('pdfkit');
 const router = express.Router();
-const { Sertifikat, PanitiaKegiatan } = require('../models/RelasiTabel'); // Pastikan model Sertifikat sudah benar
+const { Sertifikat, PanitiaKegiatan } = require('../models/RelasiTabel'); // Ensure your model is correctly referenced
 
-// Route untuk mendapatkan data sertifikat
+// Route to fetch and display Sertifikat data
 router.get('/', async (req, res) => {
   try {
-    // Ambil semua data sertifikat
     const sertifikatList = await Sertifikat.findAll({
-      include: {
-        model: PanitiaKegiatan
-      }
+      include: [{ model: PanitiaKegiatan }]
     });
-
-    // Render halaman sertifikat dengan data
     res.render('sertifikat', { sertifikatList });
   } catch (error) {
     console.error('Error fetching sertifikat data:', error.message);
@@ -21,41 +16,45 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route untuk mendownload sertifikat dalam bentuk PDF
+// Route to download a Sertifikat as a PDF
 router.get('/download/:id', async (req, res) => {
   const { id } = req.params;
-
   try {
-    // Ambil data sertifikat berdasarkan ID
-    const sertifikat = await Sertifikat.findByPk(id);
+    const sertifikat = await Sertifikat.findByPk(id, {
+      include: [PanitiaKegiatan]
+    });
 
     if (!sertifikat) {
       return res.status(404).send('Sertifikat tidak ditemukan');
     }
 
-    // Buat dokumen PDF
     const doc = new PDFDocument();
-
-    // Konfigurasi header response untuk download file
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader(
-      'Content-Disposition',
-      `attachment; filename="sertifikat-${sertifikat.nomor_sertifikat}.pdf"`
-    );
+    res.setHeader('Content-Disposition', `attachment; filename="sertifikat-${sertifikat.nomor_sertifikat}.pdf"`);
 
-    // Streaming PDF langsung ke response
     doc.pipe(res);
 
-    // Konten PDF
-    doc.fontSize(20).text('Sertifikat', { align: 'center' });
-    doc.moveDown();
-    doc.fontSize(14).text(`Nomor Sertifikat: ${sertifikat.nomor_sertifikat}`);
-    doc.text(`Panitia Kegiatan ID: ${sertifikat.panitia_kegiatan_id}`);
-    doc.text(`Tanggal Terbit: ${new Date(sertifikat.tanggal_terbit).toLocaleDateString()}`);
-    doc.moveDown();
-    doc.text('Terima kasih atas partisipasi Anda.', { align: 'center' });
+    // Header
+    doc.fontSize(25).text('Sertifikat Penghargaan', { align: 'center' });
+    doc.image('path/to/your/logo.png', {
+      fit: [150, 150],
+      align: 'center'
+    });
 
-    // Selesai membuat PDF
+    // Body
+    doc.fontSize(16).moveDown().text(`Diberikan kepada:`, { align: 'left' });
+    doc.fontSize(20).text(`${sertifikat.PanitiaKegiatan.User.nama}`, { align: 'center' });
+
+    doc.fontSize(14).moveDown().text(`Untuk partisipasi yang berharga sebagai:`, { align: 'left' });
+    doc.fontSize(16).text(`${sertifikat.PanitiaKegiatan.jabatan}`, { align: 'center' });
+
+    doc.fontSize(14).moveDown().text(`Dalam kegiatan:`, { align: 'left' });
+    doc.fontSize(18).text(`${sertifikat.PanitiaKegiatan.Kegiatan.nama_kegiatan}`, { align: 'center' });
+
+    // Footer
+    doc.fontSize(12).moveDown().text(`Dikeluarkan pada: ${new Date(sertifikat.tanggal_terbit).toLocaleDateString()}`, { align: 'center' });
+
+    // Close the PDF and end the response
     doc.end();
   } catch (error) {
     console.error('Error generating PDF:', error.message);
