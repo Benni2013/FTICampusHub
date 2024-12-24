@@ -1,7 +1,7 @@
 // Router Mahasiswa dan Panitia
 var express = require('express');
 var router = express.Router();
-const { Users, Kegiatan, Pendaftaran, Penyelenggara } = require('../models/RelasiTabel');
+const { Users, Kegiatan, Pendaftaran, Penyelenggara, Pengumuman } = require('../models/RelasiTabel');
 const { where } = require('sequelize');
 
 router.get('/home', async (req, res, next) => {
@@ -9,15 +9,22 @@ router.get('/home', async (req, res, next) => {
         let user_id = req.query.user;
         let user = await Users.findOne({ where: { user_id } });
 
-        let kegiatan = await Kegiatan.findAll();
-        const pengumuman = await Kegiatan.findAll({
-            where: { status: "closed"},
-          });
+        let kegiatan = await Kegiatan.findAll({
+            where: { status: 'published' }
+        });
+        
+        let pengumuman = await Pengumuman.findAll({
+            include: [{
+                model: Kegiatan,
+                where: { status: 'published' }
+            }],
+            order: [['waktu_pengumuman', 'DESC']]
+        });
 
         res.render('./home_mhs.hbs', { 
             title: 'Dashboard Mahasiswa', 
             layout: "layouts/main", 
-            data: {user, kegiatan}
+            data: { user, kegiatan, pengumuman }
         });
     } catch (error) {
         console.error(error);

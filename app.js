@@ -19,6 +19,14 @@ const riwayatRoutes = require('./routes/riwayatRoutes');
 const sertifikatRoutes = require('./routes/sertifikatRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 
+hbs.registerHelper('formatDate', function(date) {
+  return new Date(date).toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+});
+
 // Middleware untuk parsing JSON
 app.use(logger('dev'));
 app.use(express.json());
